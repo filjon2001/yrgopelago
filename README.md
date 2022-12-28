@@ -1,10 +1,10 @@
 WHY NOT A GIF HERE? TO SET THE MODE.
 
-# Island name
+# Isla del Cantoor
 
 Some text about your lovely island
 
-# Hotel name
+# El Morrobocho
 
 Why not add some info about the hotel of your dreams?
 
