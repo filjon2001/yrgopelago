@@ -22,7 +22,7 @@ require __DIR__ . ('/bookings.php');
     <h1>Welcome to El Morrobocho!</h1>
     <h2>Your safe haven on Isla del Cantoor.</h2>
 
-    <form action="reservation.php" method="post">
+    <form action="index.php" method="post">
         <div>
             <label for="name">Name:</label><br>
             <input type="text" name="name">
