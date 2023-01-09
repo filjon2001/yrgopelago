@@ -7,16 +7,23 @@ require 'vendor/autoload.php';
 use benhall14\phpCalendar\Calendar as Calendar;
 
 $budgetCalendar = new Calendar;
-$budgetCalendar->stylesheet();
-
-(new Calendar)->display();
-
 $standardCalendar = new Calendar;
-$standardCalendar->stylesheet();
-
-(new Calendar)->display();
-
 $luxuryCalendar = new Calendar;
-$luxuryCalendar->stylesheet();
 
-(new Calendar)->display();
+$roomCalendar = [
+    ["room" => 1, "calendar" => $budgetCalendar],
+    ["room" => 2, "calendar" => $standardCalendar],
+    ["room" => 3, "calendar" => $luxuryCalendar]
+];
+
+
+
+echo $budgetCalendar->draw(date('Y-m-d'));
+
+
+
+$standardCalendar->display();
+
+
+
+$luxuryCalendar->display();

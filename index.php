@@ -4,6 +4,7 @@ use benhall14\phpCalendar\Calendar;
 
 require __DIR__ . ('/calendar.php');
 require __DIR__ . ('/bookings.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +14,7 @@ require __DIR__ . ('/bookings.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/calendar.min.css">
+    <link rel="stylesheet" type="text/css" href="calendarstyles.css">
     <link rel="stylesheet" href="styles.css">
     <title>El Morrobocho</title>
 </head>
