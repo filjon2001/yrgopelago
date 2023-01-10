@@ -1,25 +1,32 @@
 <?php
 
+use benhall14\phpCalendar\Calendar;
+
+require 'vendor/autoload.php';
 require __DIR__ . ('/calendar.php');
 require __DIR__ . ('/bookings.php');
-require 'vendor/autoload.php';
 
-use GuzzleHttp\Client;
+/* use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 $client = new Client();
 
-$response = $client->post('http://localhost:3000//index.php', [
-    'form_params' => [
-        bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost)
-    ]
-]);
+try {
+    $response = $client->post('http://localhost:3000//index.php', [
+        'form_params' => [
+            bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost);
+            ]
+        ]);
+    } catch (ClientException $e) {
+        echo $e->getMessage();
+    } */
+
 
 // Get the booking data from the response
-$booking_data = json_decode($response->getBody(), true);
-
-// Use the booking data to create a receipt
-//$receipt = generateReceipt($booking_data);
-
+/* $booking_data = json_decode($response->getBody(), true);
+    
+    $receipt = generateReceipt($booking_data);
+    */
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +75,7 @@ $booking_data = json_decode($response->getBody(), true);
             <input type="radio" name="room_id" <?php if (isset($roomId) && $roomId == "1") echo "checked"; ?> value="1">Budget
             <input type="radio" name="room_id" <?php if (isset($roomId) && $roomId == "2") echo "checked"; ?> value="2">Standard
             <input type="radio" name="room_id" <?php if (isset($roomId) && $roomId == "3") echo "checked"; ?> value="3">Luxury <br><br>
-            <input type="submit">
+            <input type="submit" name="submit">
         </div>
 
     </form>

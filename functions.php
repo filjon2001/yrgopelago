@@ -2,18 +2,22 @@
 
 declare(strict_types=1);
 
+require 'vendor/autoload.php';
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost)
 {
     $database = connect('/bookings.db');
-    if (isset($_POST['name'], $_POST['email'], $_POST['transfer_code'], $_POST['arrival_date'], $_POST['departure_date'])) {
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $transferCode = trim($_POST['transfer_code']);
-        $arrivalDate = trim($_POST['arrival_date']);
-        $departureDate = trim($_POST['departure_date']);
+    if (isset($_POST['name'], $_POST['email'], $_POST['transfer_code'], $_POST['arrival_date'], $_POST['departure_date'], $_POST['room_id'])) {
+        $name = htmlspecialchars(trim($_POST['name']));
+        $email = htmlspecialchars(trim($_POST['email']));
+        $transferCode = htmlspecialchars(trim($_POST['transfer_code']));
+        $arrivalDate = htmlspecialchars(trim($_POST['arrival_date']));
+        $departureDate = htmlspecialchars(trim($_POST['departure_date']));
         $roomId = $_POST['room_id'];
         $roomId = intval($roomId);
-
         $totalCost = totalCost($roomId, $arrivalDate, $departureDate);
 
         $query = 'INSERT INTO bookings (name, email, transfer_code, arrival_date, departure_date, room_id, total_cost) VALUES (:name, :email, :transfer_code, :arrival_date, :departure_date, :room_id, :total_cost)';
@@ -27,6 +31,31 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         $statement->bindParam(':departure_date', $departureDate, PDO::PARAM_STR);
         $statement->bindParam(':room_id', $roomId, PDO::PARAM_INT);
         $statement->bindParam(':total_cost', $totalCost, PDO::PARAM_INT);
+
+
+        $receiptContent = [
+            "Hotel: " . $hotel = "El Morrobocho",
+            "Island: " . $island = "Isla del Cantoor",
+            "Stars: " . $stars = "0",
+            "Name: " . $name,
+            "E-mail: " . $email,
+            "Transfer-code: " . $transferCode,
+            "Arrival date: " . $arrivalDate,
+            "Departure date: " . $departureDate,
+            "Room: " . $room_id,
+            "Cost: " . $totalCost . " pesetas"
+        ];
+
+
+        $generateReceipt = file_get_contents(__DIR__ . '/confirmation.json');
+        $receipt = json_decode($generateReceipt, true);
+        array_push($receipt, $receiptContent);
+        $json = json_encode($receipt);
+        file_put_contents(__DIR__ . '/confirmation.json', $json);
+
+        echo "Thank you for booking your stay at " . $hotel . ". Hope to see you soon again.
+        Here is your receipt:" .
+            json_encode(end($receipt));
 
         $statement->execute();
     }
@@ -75,9 +104,5 @@ function occupied(int $room_id, string $arrivalDate, string $departureDate)
         return true;
     } else {
         return false;
-    }
-
-    function generateReceipt(string $name, string $email, string $transferCode, int $arrivalDate, int $departureDate, int $room_id, int $totalCost)
-    {
     }
 }
