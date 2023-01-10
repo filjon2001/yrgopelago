@@ -1,0 +1,15 @@
+[
+  {
+    "reciept": [
+      {
+        "island": "Isla del Cantoor",
+        "hotel": "El Morrobocho",
+        "arrival_date": "2023-01-01",
+        "departure_date": "2023-01-04",
+        "total_cost": "8",
+        "stars": "0",
+        "addtional_info": "Thank you for booking your stay at El Morrobocho! Hope to see you soon again."
+      }
+    ]
+  }
+]

@@ -1,9 +1,24 @@
 <?php
 
-use benhall14\phpCalendar\Calendar;
-
 require __DIR__ . ('/calendar.php');
 require __DIR__ . ('/bookings.php');
+require 'vendor/autoload.php';
+
+use GuzzleHttp\Client;
+
+$client = new Client();
+
+$response = $client->post('http://localhost:3000//index.php', [
+    'form_params' => [
+        bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost)
+    ]
+]);
+
+// Get the booking data from the response
+$booking_data = json_decode($response->getBody(), true);
+
+// Use the booking data to create a receipt
+//$receipt = generateReceipt($booking_data);
 
 ?>
 
@@ -22,6 +37,7 @@ require __DIR__ . ('/bookings.php');
 <body>
     <h1>Welcome to El Morrobocho!</h1>
     <h2>Your safe haven on Isla del Cantoor.</h2>
+    <h3>We may have zero stars, but that makes you the star!</h3>
 
     <form action="index.php" method="post">
         <div>

@@ -48,6 +48,8 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
     return $totalCost;
 }
 
+// Shows in the calendar if a room is occupied.
+
 function occupied(int $room_id, string $arrivalDate, string $departureDate)
 {
     $database = connect('/bookings.db');
@@ -73,5 +75,9 @@ function occupied(int $room_id, string $arrivalDate, string $departureDate)
         return true;
     } else {
         return false;
+    }
+
+    function generateReceipt(string $name, string $email, string $transferCode, int $arrivalDate, int $departureDate, int $room_id, int $totalCost)
+    {
     }
 }
