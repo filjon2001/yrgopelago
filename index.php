@@ -46,7 +46,7 @@ try {
     <h2>Your safe haven on Isla del Cantoor.</h2>
     <h3>We may have zero stars, but that makes you the star!</h3>
 
-    <form action="index.php" method="post">
+    <form action="bookings.php" method="post">
         <div>
             <label for="name">Name:</label><br>
             <input type="text" name="name">
