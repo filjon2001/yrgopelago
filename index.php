@@ -9,6 +9,7 @@ require 'vendor/autoload.php';
 require(__DIR__ . '/header.php');
 require(__DIR__ . '/hotelFunctions.php');
 require(__DIR__ . '/calendar.php');
+require(__DIR__ . '/functions.php');
 
 ?>
 
