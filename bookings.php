@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 require __DIR__ . ('/vendor/autoload.php');
 require(__DIR__ . '/functions.php');
 require(__DIR__ . '/hotelFunctions.php');

@@ -2,6 +2,9 @@
 
 use benhall14\phpCalendar\Calendar;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 require 'vendor/autoload.php';
 require(__DIR__ . '/header.php');
 require(__DIR__ . '/hotelFunctions.php');
