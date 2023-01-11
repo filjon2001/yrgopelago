@@ -46,16 +46,19 @@ function occupied(array $roomCalendar)
 
 occupied($roomCalendar);
 
-echo $budgetCalendar->draw(date('Y-m-d'));
 ?>
-<img src="/images/budget.png" class="budget" alt="Budget room">
 
+<img src="./images/budget.png" class="budget" alt="Budget room">
+<?php
+$budgetCalendar->display();
+?>
+
+<img src="./images/standard.png" class="standard" alt="Standard room">
 <?php
 $standardCalendar->display();
 ?>
-<img src="/images/standard.png" class="standard" alt="Standard room">
 
+<img src="./images/luxury.png" class="luxury" alt="Luxury room">
 <?php
 $luxuryCalendar->display();
 ?>
-<img src="/images/luxury.png" class="luxury" alt="Luxury room">
