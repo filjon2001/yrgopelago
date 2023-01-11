@@ -22,7 +22,7 @@ $roomCalendar = [
 function occupied(array $roomCalendar)
 {
     $database = connect('/bookings.db');
-    $stmt = $database->prepare('SELECT arrival_date, departure_date 
+    $stmt = $database->prepare('SELECT bookings.arrival_date, bookings.departure_date, bookings.room_id, rooms.room_type
     FROM bookings
     INNER JOIN rooms
     ON rooms.id = bookings.room_id');

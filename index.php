@@ -3,9 +3,9 @@
 use benhall14\phpCalendar\Calendar;
 
 require 'vendor/autoload.php';
-require __DIR__ . ('/calendar.php');
-require __DIR__ . ('/bookings.php');
-require __DIR__ . ('/hotelFunctions.php');
+
+require(__DIR__ . '/hotelFunctions.php');
+require(__DIR__ . '/calendar.php');
 
 ?>
 
