@@ -3,7 +3,7 @@
 use benhall14\phpCalendar\Calendar;
 
 require 'vendor/autoload.php';
-
+require(__DIR__ . '/header.php');
 require(__DIR__ . '/hotelFunctions.php');
 require(__DIR__ . '/calendar.php');
 
@@ -18,17 +18,13 @@ require(__DIR__ . '/calendar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="calendarstyles.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <title>El Morrobocho</title>
 </head>
 
 <body>
-    <section>
-        <div>
-            <h1>Welcome to El Morrobocho!</h1>
-            <h2>Your safe haven on Isla del Cantoor.</h2>
-            <h3>We may have zero stars, but that makes you the star!</h3>
-        </div>
-    </section>
     <form action="bookings.php" method="post">
         <div>
             <label for="name">Name:</label><br>
