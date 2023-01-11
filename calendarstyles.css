@@ -6,3 +6,24 @@
 
 .calendar-title {
 }
+
+.budget {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.standard {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.luxury {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 50%;
+}

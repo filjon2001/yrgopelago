@@ -78,31 +78,3 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
     $totalCost = (((strtotime($departureDate) - strtotime($arrivalDate)) / 86400) * $roomCost);
     return $totalCost;
 }
-
-// Shows in the calendar if a room is occupied.
-
-function occupied(int $room_id, string $arrivalDate, string $departureDate)
-{
-    $database = connect('/bookings.db');
-    $stmt = $database->prepare('SELECT arrival_date, departure_date 
-    FROM bookings
-    INNER JOIN rooms
-    ON rooms.id = bookings.room_id');
-
-    $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
-    $stmt->bindParam(':arrival_date', $arrivalDate, PDO::PARAM_INT);
-    $stmt->bindParam(':departure_date', $departureDate, PDO::PARAM_INT);
-
-    $stmt->execute();
-
-    $notAvailable = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($notAvailable as $occupied) {
-    }
-
-    if (!empty($notAvailable) && $departureDate > $arrivalDate) {
-        return true;
-    } else {
-        return false;
-    }
-}

@@ -5,28 +5,8 @@ use benhall14\phpCalendar\Calendar;
 require 'vendor/autoload.php';
 require __DIR__ . ('/calendar.php');
 require __DIR__ . ('/bookings.php');
+require __DIR__ . ('/hotelFunctions.php');
 
-/* use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-
-$client = new Client();
-
-try {
-    $response = $client->post('http://localhost:3000//index.php', [
-        'form_params' => [
-            bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost);
-            ]
-        ]);
-    } catch (ClientException $e) {
-        echo $e->getMessage();
-    } */
-
-
-// Get the booking data from the response
-/* $booking_data = json_decode($response->getBody(), true);
-    
-    $receipt = generateReceipt($booking_data);
-    */
 ?>
 
 <!DOCTYPE html>
@@ -42,10 +22,13 @@ try {
 </head>
 
 <body>
-    <h1>Welcome to El Morrobocho!</h1>
-    <h2>Your safe haven on Isla del Cantoor.</h2>
-    <h3>We may have zero stars, but that makes you the star!</h3>
-
+    <section>
+        <div>
+            <h1>Welcome to El Morrobocho!</h1>
+            <h2>Your safe haven on Isla del Cantoor.</h2>
+            <h3>We may have zero stars, but that makes you the star!</h3>
+        </div>
+    </section>
     <form action="bookings.php" method="post">
         <div>
             <label for="name">Name:</label><br>
@@ -77,7 +60,6 @@ try {
             <input type="radio" name="room_id" <?php if (isset($roomId) && $roomId == "3") echo "checked"; ?> value="3">Luxury <br><br>
             <input type="submit" name="submit">
         </div>
-
     </form>
 
 </body>
