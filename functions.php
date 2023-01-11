@@ -53,6 +53,8 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         $json = json_encode($receipt);
         file_put_contents(__DIR__ . '/confirmation.json', $json);
 
+        header('Content-Type: application/json');
+
         echo "Thank you for booking your stay at " . $hotel . ". Hope to see you soon again.
         Here is your receipt:" .
             json_encode(end($receipt));
@@ -84,13 +86,8 @@ function occupied(int $room_id, string $arrivalDate, string $departureDate)
     $database = connect('/bookings.db');
     $stmt = $database->prepare('SELECT arrival_date, departure_date 
     FROM bookings
-    WHERE id = :room_id
-    AND (arrival_date <= :arrival_date
-    OR arrival_date < :departure_date)
-    AND
-    (departure_date > :arrival_date
-    OR
-    departure_date > :departure_date)');
+    INNER JOIN rooms
+    ON rooms.id = bookings.room_id');
 
     $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
     $stmt->bindParam(':arrival_date', $arrivalDate, PDO::PARAM_INT);
@@ -98,9 +95,12 @@ function occupied(int $room_id, string $arrivalDate, string $departureDate)
 
     $stmt->execute();
 
-    $isAvailable = $stmt->fetch(PDO::FETCH_ASSOC);
+    $notAvailable = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($arrivalDate) && $departureDate > $arrivalDate) {
+    foreach ($notAvailable as $occupied) {
+    }
+
+    if (!empty($notAvailable) && $departureDate > $arrivalDate) {
         return true;
     } else {
         return false;
