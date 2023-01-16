@@ -62,6 +62,10 @@ require(__DIR__ . '/functions.php');
         </div>
     </form>
 
+    <?php
+    deposit($transferCode);
+    ?>
+
 </body>
 
 </html>

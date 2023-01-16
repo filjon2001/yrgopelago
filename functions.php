@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require(__DIR__ . '/validation.php');
+
 require 'vendor/autoload.php';
 
 
@@ -37,7 +39,7 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         $receiptContent = [
             "Hotel: " . $hotel = "El Morrobocho",
             "Island: " . $island = "Isla del Cantoor",
-            "Stars: " . $stars = "0",
+            "Stars: " . $stars = "1",
             "Name: " . $name,
             "E-mail: " . $email,
             "Transfer-code: " . $transferCode,
@@ -60,6 +62,7 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         Here is your receipt:\n\n" .
             json_encode(end($receipt));
 
+
         $statement->execute();
     }
 };
@@ -80,7 +83,33 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
     return $totalCost;
 }
 
-/* function deposit()
+function checkCode(string $transferCode, int $totalCost): bool
+{
+    $client = new Client();
+    $response = $client->request(
+        'POST',
+        'https://www.yrgopelago.se/centralbank/transferCode',
+        [
+            'form_params' => [
+                'transferCode' => $transferCode,
+                'totalcost' => $totalCost
+            ]
+        ]
+
+    );
+    if ($response->hasHeader('Content-Length')) {
+        $transfer_code = json_decode($response->getBody()->getContents());
+    }
+
+    if (isset($transfer_code->error)) {
+
+        return false;
+    } else {
+        return true;
+    }
+};
+
+function deposit(string $transferCode)
 {
     $client = new Client();
 
@@ -90,37 +119,24 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
         [
             'form_params' => [
                 'user' => 'Filip',
-                'transferCode' => "3529ace0-1217-41fb-8576-8066f191e738"
+                'transferCode' => $transferCode
+
             ]
         ]
-    );
 
+
+    );
     if ($response->hasHeader('Content-Length')) {
-        $transfer_code = json_decode($response->getBody()->getContents());
-
-        if (isset($transfer_code->error)) {
-            $errors[] = $transfer_code->error;
-            return false;
-        } else {
-            return true;
-        }
+        $deposit = json_decode($response->getBody()->getContents());
     }
-} */
 
-/* function checkCode(string $transferCode, int $totalCost): bool
-{
-    $client = new Client();
-    $response = $client->request(
-        'POST',
-        'https://www.yrgopelago.se/centralbank/transferCode',
-        [
-            'form_params' => [
-                'transferCode' => $transferCode,
-                'total_cost' => $totalCost,
-            ]
-        ]
-    );
-} */
+    if (isset($deposit->error)) {
+
+        return false;
+    } else {
+        return true;
+    }
+};
 
 /* function depositCode(string $transferCode, int $totalCost): bool
 {
