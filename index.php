@@ -63,7 +63,7 @@ require(__DIR__ . '/functions.php');
     </form>
 
     <?php
-    deposit($transferCode);
+    /* deposit($transferCode); */
     ?>
 
 </body>

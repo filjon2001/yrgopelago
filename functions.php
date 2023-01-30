@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-require(__DIR__ . '/validation.php');
-
 require 'vendor/autoload.php';
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -83,6 +80,18 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
     return $totalCost;
 }
 
+/* function occupied(int $room_id, string $arrivalDate, string $departureDate)
+{
+    //calls on function that checks if uuid is valid
+    if (isValidUuid($transferCode)) {
+
+        $totalCost = totalCost($rooms, $arrivalDate, $departureDate);
+        //calls on function that checks if the transfer code and deposit are valid
+        $isTransferCodeTrue = checkTransferCode($transferCode, $totalCost);
+        $isDepositTrue = deposit($transferCode);
+    }
+} */
+
 function checkCode(string $transferCode, int $totalCost): bool
 {
     $client = new Client();
@@ -109,7 +118,7 @@ function checkCode(string $transferCode, int $totalCost): bool
     }
 };
 
-function deposit(string $transferCode)
+/* function deposit(string $transferCode)
 {
     $client = new Client();
 
@@ -123,8 +132,6 @@ function deposit(string $transferCode)
 
             ]
         ]
-
-
     );
     if ($response->hasHeader('Content-Length')) {
         $deposit = json_decode($response->getBody()->getContents());
@@ -136,7 +143,7 @@ function deposit(string $transferCode)
     } else {
         return true;
     }
-};
+} */
 
 /* function depositCode(string $transferCode, int $totalCost): bool
 {
