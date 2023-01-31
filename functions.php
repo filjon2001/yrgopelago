@@ -82,12 +82,11 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
 
 /* function occupied(int $room_id, string $arrivalDate, string $departureDate)
 {
-    //calls on function that checks if uuid is valid
     if (isValidUuid($transferCode)) {
 
         $totalCost = totalCost($rooms, $arrivalDate, $departureDate);
         //calls on function that checks if the transfer code and deposit are valid
-        $isTransferCodeTrue = checkTransferCode($transferCode, $totalCost);
+        $isTransferCodeTrue = checkCode($transferCode, $totalCost);
         $isDepositTrue = deposit($transferCode);
     }
 } */
@@ -118,7 +117,7 @@ function checkCode(string $transferCode, int $totalCost): bool
     }
 };
 
-/* function deposit(string $transferCode)
+function deposit(string $transferCode)
 {
     $client = new Client();
 
@@ -129,7 +128,6 @@ function checkCode(string $transferCode, int $totalCost): bool
             'form_params' => [
                 'user' => 'Filip',
                 'transferCode' => $transferCode
-
             ]
         ]
     );
@@ -143,22 +141,4 @@ function checkCode(string $transferCode, int $totalCost): bool
     } else {
         return true;
     }
-} */
-
-/* function depositCode(string $transferCode, int $totalCost): bool
-{
-    $client = new Client();
-    $response = $client->request(
-        'POST',
-        'https://www.yrgopelago.se/centralbank/deposit',
-        [
-            'form_params' => [
-                'user' => "string",
-                'myUsername' => "Filip",
-                'total_cost' => $totalCost,
-                'myTransferCode' => "3529ace0-1217-41fb-8576-8066f191e738",
-                'userTransferCode' => $transferCode,
-            ]
-        ]
-    );
-} */
+}
