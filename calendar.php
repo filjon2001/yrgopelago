@@ -13,11 +13,14 @@ $standardCalendar->useMondayStartingDate();
 $luxuryCalendar = new Calendar;
 $luxuryCalendar->useMondayStartingDate();
 
+// Array with three different calendars
 $roomCalendar = [
     ["room" => 1, "calendar" => $budgetCalendar],
     ["room" => 2, "calendar" => $standardCalendar],
     ["room" => 3, "calendar" => $luxuryCalendar]
 ];
+
+// Function that makes rooms occupied when booked.
 
 function occupied(array $roomCalendar)
 {
@@ -31,6 +34,7 @@ function occupied(array $roomCalendar)
 
     $notAvailable = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // Making the calendar switch color when booked
     if (!empty($notAvailable)) {
         $mask = true;
     }

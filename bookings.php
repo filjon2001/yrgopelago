@@ -9,6 +9,8 @@ require __DIR__ . ('/vendor/autoload.php');
 require(__DIR__ . '/functions.php');
 require(__DIR__ . '/hotelFunctions.php');
 
+// Assigns the form to variables.
+
 if (isset($_POST['submit'])) {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);

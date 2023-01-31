@@ -7,6 +7,7 @@ require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
+// Function that handeles the bookings. Connecting to database, making variables out of the content the traveller posts in the form.
 function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $room_id, $totalCost)
 {
     $database = connect('/bookings.db');
@@ -18,6 +19,7 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         $departureDate = htmlspecialchars(trim($_POST['departure_date']));
         $roomId = $_POST['room_id'];
         $roomId = intval($roomId);
+        // Assigns the function totalCost to the variable with the same name. See further down.
         $totalCost = totalCost($roomId, $arrivalDate, $departureDate);
 
         $query = 'INSERT INTO bookings (name, email, transfer_code, arrival_date, departure_date, room_id, total_cost) VALUES (:name, :email, :transfer_code, :arrival_date, :departure_date, :room_id, :total_cost)';
@@ -32,7 +34,7 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
         $statement->bindParam(':room_id', $roomId, PDO::PARAM_INT);
         $statement->bindParam(':total_cost', $totalCost, PDO::PARAM_INT);
 
-
+        // Creating receipt
         $receiptContent = [
             "Hotel: " . $hotel = "El Morrobocho",
             "Island: " . $island = "Isla del Cantoor",
@@ -46,19 +48,17 @@ function bookings($name, $email, $transferCode, $arrivalDate, $departureDate, $r
             "Cost: $" . $totalCost
         ];
 
-
         $generateReceipt = file_get_contents(__DIR__ . '/confirmation.json');
         $receipt = json_decode($generateReceipt, true);
         array_push($receipt, $receiptContent);
         $json = json_encode($receipt);
         file_put_contents(__DIR__ . '/confirmation.json', $json);
-
+        // Directs the traveller to the receipt
         header('Content-Type: application/json');
 
         echo "Thank you for booking your stay at " . $hotel . ". Hope to see you soon again. \n
         Here is your receipt:\n\n" .
             json_encode(end($receipt));
-
 
         $statement->execute();
     }
@@ -91,6 +91,8 @@ function totalCost(int $room_id, string $arrivalDate, string $departureDate)
     }
 } */
 
+// Function that checks if the transfer code is valid
+
 function checkCode(string $transferCode, int $totalCost): bool
 {
     $client = new Client();
@@ -116,6 +118,8 @@ function checkCode(string $transferCode, int $totalCost): bool
         return true;
     }
 };
+
+// Function that makes the the deposit
 
 function deposit(string $transferCode)
 {
