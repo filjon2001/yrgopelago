@@ -43,15 +43,18 @@ $bookings= json_decode($jsonData, true);
         <div class="fact-card">
 
             <?php $bookings = factBoxRevenue();
+
             $totalCost = 0;
             foreach ($bookings as $booking) {
                     $totalCost += $booking['total_cost'];
                 }
-                $average = $totalCost / count($bookings); ?>
+                $average = $totalCost / count($bookings);
+               ?>
 
             <p>Total revenue of the hotel: <?= $totalCost . "$"?>
             <p> Average cost per booking: <?= $average . "$"?> <br>
         </div>
+
         <a href="index.php"><button class="homepage">Homepage</button></a>
         </div>
     </section>
