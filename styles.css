@@ -21,3 +21,72 @@ h2 {
 h3 {
   font-style: oblique;
 }
+
+/* styling for the cards*/
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card {
+  width: 40rem;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fbaf00;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cards p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+}
+
+/* Styling for the factbox*/
+.factbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-hotels {
+  color: black;
+  text-align: center;
+}
+
+.factbox h2 {
+  color: black;
+  font-size: 25px;
+}
+
+.factbox p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+}
+.fact-card {
+  width: 40rem;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fbaf00;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.homepage {
+  font-size: 17px;
+}
+
+/* styling the logbook link */
+
+a {
+  text-decoration: none;
+  font-size: 17px;
+  margin: 2rem;
+  color: black;
+}
+
+.logbook {
+  margin-bottom: 1rem;
+}
