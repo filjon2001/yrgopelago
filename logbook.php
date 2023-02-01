@@ -50,7 +50,7 @@ $bookings= json_decode($jsonData, true);
                 $average = $totalCost / count($bookings); ?>
 
             <p>Total revenue of the hotel: <?= $totalCost . "$"?>
-            <p> Average cost per booking: <?=$average . "$"?> <br>
+            <p> Average cost per booking: <?= $average . "$"?> <br>
         </div>
         <a href="index.php"><button class="homepage">Homepage</button></a>
         </div>
