@@ -24,7 +24,7 @@ $bookings= json_decode($jsonData, true);
              $island= $bookingInfo["island"];
              $hotel = $bookingInfo["hotel"];
 
-             echo "<h3> Visit to " . $hotel . " at " . $island . "</h3>"?>
+             echo "<h3> Visited " . $hotel . " at " . $island . "</h3>"?>
 
             <p>Arrival Date: <?= $bookingInfo["arrival_date"] ?></p>
             <p>Departure Date: <?= $bookingInfo["departure_date"] ?></p>
